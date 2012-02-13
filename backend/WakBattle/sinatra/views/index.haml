@@ -1,0 +1,172 @@
+%html
+	%head 
+		%title Kampfrechner
+		%style{:type => "text/css"}
+			:plain
+				#unit_classes {
+					padding: 10px;
+					border-width:1px; 
+					border-color:black; 
+					border-style:solid;
+					margin-bottom: 10px;
+				}
+				#unit_types {
+					padding: 10px;
+					border-width:1px; 
+					border-color:black; 
+					border-style:solid;
+					margin-bottom: 10px;
+				}
+				.unit_class {
+					border-width:1px; 
+					border-color:black; 
+					border-style:dotted;
+					padding: 5px;
+					margin-top: 5px;
+					margin-bottom: 5px;
+				}
+				.unit_type {
+					border-width:1px; 
+					border-color:black; 
+					border-style:dotted; 
+					padding:5px;
+					margin: 5px;
+				}
+				.unit_type_damage_weight {
+					border-width:1px; 
+					border-color:black; 
+					border-style:dotted;
+					padding: 5px;
+					margin: 5px;
+				}
+				#forces {
+					padding: 10px;
+					border-width:1px; 
+					border-color:black; 
+					border-style:solid;
+					margin-bottom: 10px;
+				}
+				.force {
+					border-width:1px; 
+					border-color:black; 
+					border-style:dotted; 
+					padding:5px;
+					margin: 5px;
+				}
+				.army {
+					border-width:1px; 
+					border-color:black; 
+					border-style:dotted; 
+					padding:5px;
+					margin: 5px;
+				}
+	%body
+		%h1 Kampfrechner:
+		%form{ :action => "", :method => "get"}
+			#unit_classes
+				%h2 Klassen:
+				- @classes.each do |k, v|
+					.unit_class
+						%label{:for => "classes[]name"} Name:
+						%input{ :type => "text", :name => "classes[]name", :value => v.name}
+				%input{ :type => "submit", :value => "Update"}
+				%h3 Hinzufügen:
+				.unit_class
+					%label{:for => "classes[]name"} Name:
+					%input{ :type => "text", :name => "classes[]name" }
+					%input{ :type => "submit", :value => "Hinzufügen"}
+			#unit_types
+				%h2 Einheitentypen:
+				- i = 0
+				- @types.each do |k, v|
+					.unit_type
+						%h3= v.name
+						%p
+							%label{:for => "types[#{i}]name"} Name:
+							%input{ :type => "text", :name => "types[#{i}]name", :value => v.name }
+						%p
+							%label{:for => "types[#{i}]unitClass"} Klasse:
+							%select{ :name => "types[#{i}]unitClass" }
+								- @classes.each do |k2, v2|
+									%option{:value => k2, :selected => k2.eql?(v.unitClass.name)}= k2
+						%p
+							%label{:for => "types[#{i}]damage"} Schaden:
+							%input{ :type => "text", :name => "types[#{i}]damage", :value => v.damage }
+						%p
+							%label{:for => "types[#{i}]criticalDamage"} Kritischer Schaden:
+							%input{ :type => "text", :name => "types[#{i}]criticalDamage", :value => v.criticalDamage }
+							%label{:for => "types[#{i}]criticalProbability"} Wahrscheinlichkeit dafür:
+							%input{ :type => "text", :name => "types[#{i}]criticalProbability", :value => v.criticalProbability }
+						%p
+							%label{:for => "types[#{i}]attackerBonusDamage"} Angreifer Bonus Schaden:
+							%input{ :type => "text", :name => "types[#{i}]attackerBonusDamage", :value => v.attackerBonusDamage }
+						%p
+							%label{:for => "types[#{i}]hitpoints"} Hitpoints:
+							%input{ :type => "text", :name => "types[#{i}]hitpoints", :value => v.hitpoints }
+						%p
+							%label{:for => "types[#{i}]defenderBonusHitpoints"} Verteidiger Bonus Hitpoints:
+							%input{ :type => "text", :name => "types[#{i}]defenderBonusHitpoints", :value => v.defenderBonusHitpoints }
+						.unit_type_damage_weight
+							%h4 Schadensverteilung:
+							- @classes.each do |k2, v2|
+								%p
+									%label{:for => "types[#{i}]weight[#{k2}]"}= k2
+									%input{ :type => "text", :name => "types[#{i}]weight[#{k2}]", :value => v.getDamageDistribution(@classes[k2].getId) }
+					- i += 1
+				%input{ :type => "submit", :value => "Update"}
+				%h3 Hinzufügen:
+				.unit_type
+					%h3 Typ
+					%p
+						%label{:for => "types[#{@types.size}]name"} Name:
+						%input{ :type => "text", :name => "types[#{@types.size}]name" }
+					%p
+						%label{:for => "types[#{@types.size}]unitClass"} Klasse:
+						%select{ :name => "types[#{@types.size}]unitClass" }
+							- @classes.each do |k, v|
+								%option= k
+					%p
+						%label{:for => "types[#{@types.size}]damage"} Schaden:
+						%input{ :type => "text", :name => "types[#{@types.size}]damage", :value => 0.0 }
+					%p
+						%label{:for => "types[#{@types.size}]criticalDamage"} Kritischer Schaden:
+						%input{ :type => "text", :name => "types[#{@types.size}]criticalDamage", :value => 0.0 }
+						%label{:for => "types[#{@types.size}]criticalProbability"} Wahrscheinlichkeit dafür:
+						%input{ :type => "text", :name => "types[#{@types.size}]criticalProbability", :value => 0.1 }
+					%p
+						%label{:for => "types[#{@types.size}]attackerBonusDamage"} Angreifer Bonus Schaden:
+						%input{ :type => "text", :name => "types[#{@types.size}]attackerBonusDamage", :value => 0.0 }
+					%p
+						%label{:for => "types[#{@types.size}]hitpoints"} Hitpoints:
+						%input{ :type => "text", :name => "types[#{@types.size}]hitpoints", :value => 0.0 }
+					%p
+						%label{:for => "types[#{@types.size}]defenderBonusHitpoints"} Verteidiger Bonus Hitpoints:
+						%input{ :type => "text", :name => "types[#{@types.size}]defenderBonusHitpoints", :value => 0.0 }
+					.unit_type_damage_weight
+						%h4 Schadensverteilung:
+						- @classes.each do |k2, v2|
+							%p
+								%label{:for => "types[#{@types.size}]weight[#{k2}]"}= k2
+								%input{ :type => "text", :name => "types[#{@types.size}]weight[#{k2}]", :value => 1.0/@classes.size.to_f }
+					%input{ :type => "submit", :value => "Hinzufügen"}
+			#forces
+				%h2 Forces:
+				- for i_force in 0...@fight.size
+					.force
+						%h3= "Force #{i_force}"
+						- for i_army in 0...@fight.getForce(i_force).numArmies
+							.army
+								%h3= @fight.getForce(i_force).getArmy(i_army).name
+								- @types.each do |k, v|
+									%p
+										%label{:for => "forces[#{i_force}][#{@fight.getForce(i_force).getArmy(i_army).name}][#{k}]"}= "Num #{k}:"
+										%input{ :type => "text", :name => "forces[#{i_force}][#{@fight.getForce(i_force).getArmy(i_army).name}][#{k}]", :value => @fight.getForce(i_force).getArmy(i_army).getNumUnits(v.getId) }
+				%input{ :type => "submit", :value => "Fight"}
+				
+			#fightlog
+				%h2 Fight Log:
+				- lines = @fight_log.split("\n")
+				- unless lines.empty?
+					%ul
+						- lines.each do |line|
+							%li= line

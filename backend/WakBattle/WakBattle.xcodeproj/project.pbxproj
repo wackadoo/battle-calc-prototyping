@@ -1,0 +1,269 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		B9528AFE14CD73710093F043 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B9528AFD14CD73710093F043 /* main.cpp */; };
+		B9528B0A14CD78CA0093F043 /* UnitType.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B9528B0914CD78CA0093F043 /* UnitType.cpp */; };
+		B9528B0C14CD78D70093F043 /* UnitClass.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B9528B0B14CD78D70093F043 /* UnitClass.cpp */; };
+		B9528B0E14CD78E70093F043 /* Force.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B9528B0D14CD78E70093F043 /* Force.cpp */; };
+		B9528B1014CD79280093F043 /* Army.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B9528B0F14CD79280093F043 /* Army.cpp */; };
+		B9528B1314CD85C20093F043 /* BattleCalculator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B9528B1214CD85C20093F043 /* BattleCalculator.cpp */; };
+		B9C88B5814DF147300981AC5 /* Damage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B9C88B5714DF147300981AC5 /* Damage.cpp */; };
+		B9C88B5C14DF15FB00981AC5 /* Random.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B9C88B5B14DF15FB00981AC5 /* Random.cpp */; };
+		B9C88B6914E0333A00981AC5 /* BattleLog.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B9C88B6814E0333A00981AC5 /* BattleLog.cpp */; };
+		B9C88B6D14E3E20300981AC5 /* Fight.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B9C88B6C14E3E20300981AC5 /* Fight.cpp */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		B9528AF714CD73710093F043 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		B9528AF914CD73710093F043 /* WakBattle */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = WakBattle; sourceTree = BUILT_PRODUCTS_DIR; };
+		B9528AFD14CD73710093F043 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		B9528B0614CD73890093F043 /* Force.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Force.h; sourceTree = "<group>"; };
+		B9528B0714CD746C0093F043 /* UnitType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UnitType.h; sourceTree = "<group>"; };
+		B9528B0814CD76510093F043 /* UnitClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UnitClass.h; sourceTree = "<group>"; };
+		B9528B0914CD78CA0093F043 /* UnitType.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = UnitType.cpp; sourceTree = "<group>"; };
+		B9528B0B14CD78D70093F043 /* UnitClass.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = UnitClass.cpp; sourceTree = "<group>"; };
+		B9528B0D14CD78E70093F043 /* Force.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Force.cpp; sourceTree = "<group>"; };
+		B9528B0F14CD79280093F043 /* Army.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Army.cpp; sourceTree = "<group>"; };
+		B9528B1114CD79310093F043 /* Army.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Army.h; sourceTree = "<group>"; };
+		B9528B1214CD85C20093F043 /* BattleCalculator.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BattleCalculator.cpp; sourceTree = "<group>"; };
+		B9528B1414CD85D20093F043 /* BattleCalculator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BattleCalculator.h; sourceTree = "<group>"; };
+		B9C88B5514DF146600981AC5 /* Damage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Damage.h; sourceTree = "<group>"; };
+		B9C88B5714DF147300981AC5 /* Damage.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Damage.cpp; sourceTree = "<group>"; };
+		B9C88B5A14DF15D400981AC5 /* Random.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Random.h; path = util/Random.h; sourceTree = "<group>"; };
+		B9C88B5B14DF15FB00981AC5 /* Random.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Random.cpp; path = util/Random.cpp; sourceTree = "<group>"; };
+		B9C88B6814E0333A00981AC5 /* BattleLog.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = BattleLog.cpp; sourceTree = "<group>"; };
+		B9C88B6A14E0334800981AC5 /* BattleLog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BattleLog.h; sourceTree = "<group>"; };
+		B9C88B6B14E3E0F300981AC5 /* Fight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Fight.h; sourceTree = "<group>"; };
+		B9C88B6C14E3E20300981AC5 /* Fight.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Fight.cpp; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		B9528AF614CD73710093F043 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		B9528AEE14CD73710093F043 = {
+			isa = PBXGroup;
+			children = (
+				B9528AFC14CD73710093F043 /* WakBattle */,
+				B9528AFA14CD73710093F043 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		B9528AFA14CD73710093F043 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				B9528AF914CD73710093F043 /* WakBattle */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		B9528AFC14CD73710093F043 /* WakBattle */ = {
+			isa = PBXGroup;
+			children = (
+				B9C88B5914DF15A700981AC5 /* util */,
+				B9528B0F14CD79280093F043 /* Army.cpp */,
+				B9528B1114CD79310093F043 /* Army.h */,
+				B9528B1214CD85C20093F043 /* BattleCalculator.cpp */,
+				B9528B1414CD85D20093F043 /* BattleCalculator.h */,
+				B9528B0D14CD78E70093F043 /* Force.cpp */,
+				B9528B0614CD73890093F043 /* Force.h */,
+				B9528AFD14CD73710093F043 /* main.cpp */,
+				B9528B0B14CD78D70093F043 /* UnitClass.cpp */,
+				B9528B0814CD76510093F043 /* UnitClass.h */,
+				B9528B0914CD78CA0093F043 /* UnitType.cpp */,
+				B9528B0714CD746C0093F043 /* UnitType.h */,
+				B9C88B5514DF146600981AC5 /* Damage.h */,
+				B9C88B5714DF147300981AC5 /* Damage.cpp */,
+				B9C88B6814E0333A00981AC5 /* BattleLog.cpp */,
+				B9C88B6A14E0334800981AC5 /* BattleLog.h */,
+				B9C88B6B14E3E0F300981AC5 /* Fight.h */,
+				B9C88B6C14E3E20300981AC5 /* Fight.cpp */,
+			);
+			path = WakBattle;
+			sourceTree = "<group>";
+		};
+		B9C88B5914DF15A700981AC5 /* util */ = {
+			isa = PBXGroup;
+			children = (
+				B9C88B5A14DF15D400981AC5 /* Random.h */,
+				B9C88B5B14DF15FB00981AC5 /* Random.cpp */,
+			);
+			name = util;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		B9528AF814CD73710093F043 /* WakBattle */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B9528B0314CD73710093F043 /* Build configuration list for PBXNativeTarget "WakBattle" */;
+			buildPhases = (
+				B9528AF514CD73710093F043 /* Sources */,
+				B9528AF614CD73710093F043 /* Frameworks */,
+				B9528AF714CD73710093F043 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = WakBattle;
+			productName = WakBattle;
+			productReference = B9528AF914CD73710093F043 /* WakBattle */;
+			productType = "com.apple.product-type.tool";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		B9528AF014CD73710093F043 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0420;
+			};
+			buildConfigurationList = B9528AF314CD73710093F043 /* Build configuration list for PBXProject "WakBattle" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = B9528AEE14CD73710093F043;
+			productRefGroup = B9528AFA14CD73710093F043 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				B9528AF814CD73710093F043 /* WakBattle */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		B9528AF514CD73710093F043 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B9528AFE14CD73710093F043 /* main.cpp in Sources */,
+				B9528B0A14CD78CA0093F043 /* UnitType.cpp in Sources */,
+				B9528B0C14CD78D70093F043 /* UnitClass.cpp in Sources */,
+				B9528B0E14CD78E70093F043 /* Force.cpp in Sources */,
+				B9528B1014CD79280093F043 /* Army.cpp in Sources */,
+				B9528B1314CD85C20093F043 /* BattleCalculator.cpp in Sources */,
+				B9C88B5814DF147300981AC5 /* Damage.cpp in Sources */,
+				B9C88B5C14DF15FB00981AC5 /* Random.cpp in Sources */,
+				B9C88B6914E0333A00981AC5 /* BattleLog.cpp in Sources */,
+				B9C88B6D14E3E20300981AC5 /* Fight.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		B9528B0114CD73710093F043 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = YES;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = "\"$(SRCROOT)/WakBattle\"";
+				MACOSX_DEPLOYMENT_TARGET = 10.6;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		B9528B0214CD73710093F043 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = YES;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = "\"$(SRCROOT)/WakBattle\"";
+				MACOSX_DEPLOYMENT_TARGET = 10.6;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		B9528B0414CD73710093F043 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		B9528B0514CD73710093F043 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		B9528AF314CD73710093F043 /* Build configuration list for PBXProject "WakBattle" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B9528B0114CD73710093F043 /* Debug */,
+				B9528B0214CD73710093F043 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		B9528B0314CD73710093F043 /* Build configuration list for PBXNativeTarget "WakBattle" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B9528B0414CD73710093F043 /* Debug */,
+				B9528B0514CD73710093F043 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = B9528AF014CD73710093F043 /* Project object */;
+}
