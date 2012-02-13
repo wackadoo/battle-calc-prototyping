@@ -1,6 +1,6 @@
 %html
 	%head 
-		%title Kampfrechner
+		%title Kampfulator
 		%style{:type => "text/css"}
 			:plain
 				#unit_classes {
@@ -46,6 +46,13 @@
 					border-style:solid;
 					margin-bottom: 10px;
 				}
+				#fight-overview {
+					padding: 10px;
+					border-width:1px; 
+					border-color:black; 
+					border-style:solid;
+					margin-bottom: 10px;
+				}
 				.force {
 					border-width:1px; 
 					border-color:black; 
@@ -60,9 +67,57 @@
 					padding:5px;
 					margin: 5px;
 				}
+				table, tr, td, th {
+					border: 1px solid black;
+					border-collapse: collapse;
+					padding: 2px 6px;
+				}
+				#fight-overview input {
+					width: 60px;
+				}
 	%body
-		%h1 Kampfrechner:
+		%h1 Kampfulator: 
 		%form{ :action => "", :method => "get"}
+		
+			#fight-overview
+				%h2 Fight Overview:
+				- if @fight.size == 2 && @fight_after.size == 2
+					.army
+						%h3= "Attacker: #{ @fight.getForce(0).getArmy(0).name}"
+						%table
+							%tr
+								%th
+								- @types.each do |k, v|
+									%th= "#{k.slice(0,5)}"
+							%tr
+								%td before
+								- @types.each do |k,v|
+									%td
+										%input{ :type => "text", :name => "forces[#{0}][#{@fight.getForce(0).getArmy(0).name}][#{k}]", :value => @fight.getForce(0).getArmy(0).getNumUnits(v.getId) }
+
+							%tr
+								%td after
+								- @types.each do |k,v|
+									%td= @fight_after.getForce(0).getArmy(0).getNumUnits(v.getId) 
+
+					.army						
+						%h3= "Defender: #{ @fight.getForce(1).getArmy(0).name}"
+						%table
+							%tr
+								%th
+								- @types.each do |k, v|
+									%th= "#{k.slice(0,5)}"
+							%tr
+								%td before
+								- @types.each do |k,v|
+									%td
+										%input{ :type => "text", :name => "forces[#{1}][#{@fight.getForce(1).getArmy(0).name}][#{k}]", :value => @fight.getForce(1).getArmy(0).getNumUnits(v.getId) }
+							%tr
+								%td after
+								- @types.each do |k,v|
+									%td= @fight_after.getForce(1).getArmy(0).getNumUnits(v.getId) 
+		
+		
 			#unit_classes
 				%h2 Klassen:
 				- @classes.each do |k, v|
@@ -149,19 +204,12 @@
 								%label{:for => "types[#{@types.size}]weight[#{k2}]"}= k2
 								%input{ :type => "text", :name => "types[#{@types.size}]weight[#{k2}]", :value => 1.0/@classes.size.to_f }
 					%input{ :type => "submit", :value => "Hinzufügen"}
-			#forces
-				%h2 Forces:
-				- for i_force in 0...@fight.size
-					.force
-						%h3= "Force #{i_force}"
-						- for i_army in 0...@fight.getForce(i_force).numArmies
-							.army
-								%h3= @fight.getForce(i_force).getArmy(i_army).name
-								- @types.each do |k, v|
-									%p
-										%label{:for => "forces[#{i_force}][#{@fight.getForce(i_force).getArmy(i_army).name}][#{k}]"}= "Num #{k}:"
-										%input{ :type => "text", :name => "forces[#{i_force}][#{@fight.getForce(i_force).getArmy(i_army).name}][#{k}]", :value => @fight.getForce(i_force).getArmy(i_army).getNumUnits(v.getId) }
-				%input{ :type => "submit", :value => "Fight"}
+
+				
+
+
+
+
 				
 			#fightlog
 				%h2 Fight Log:
