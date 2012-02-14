@@ -83,7 +83,7 @@
 				%h2 Fight Overview:
 				- if @fight.size == 2 && @fight_after.size == 2
 					.army
-						%h3= "Attacker: #{ @fight.getForce(0).getArmy(0).name}"
+						%h3= "#{@fight.getForce(0).isDefender ? 'Defender':''}#{@fight.getForce(0).isAttacker ? 'Attacker':''}: #{ @fight.getForce(0).getArmy(0).name}"
 						%table
 							%tr
 								%th
@@ -101,7 +101,7 @@
 									%td= @fight_after.getForce(0).getArmy(0).getNumUnits(v.getId) 
 
 					.army						
-						%h3= "Defender: #{ @fight.getForce(1).getArmy(0).name}"
+						%h3= "#{@fight.getForce(1).isDefender ? 'Defender':''}#{@fight.getForce(1).isAttacker ? 'Attacker':''}: #{ @fight.getForce(1).getArmy(0).name}"
 						%table
 							%tr
 								%th

@@ -26,9 +26,9 @@ def parse_fight(params, types)
   re = Bc::Fight.new
   
   f1 = Bc::Force.new
+  f1.isAttacker = true
   a1 = Bc::Army.new
   a1.name = "Army1"
-  
   if params.kind_of?(Hash) && params["0"].kind_of?(Hash) && params["0"]["Army1"].kind_of?(Hash)
     puts "fooo"
     params["0"]["Army1"].each {
@@ -41,9 +41,9 @@ def parse_fight(params, types)
   re.addForce(f1)
   
   f2 = Bc::Force.new
+  f2.isDefender = true
   a2 = Bc::Army.new
   a2.name = "Army2"
-  
   if params.kind_of?(Hash) && params["1"].kind_of?(Hash) && params["1"]["Army2"].kind_of?(Hash)
     params["1"]["Army2"].each {
       |k,v|
