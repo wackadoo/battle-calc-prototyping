@@ -13,6 +13,7 @@ UnitType::UnitType():
 	unitClass(0),
 	damageDistribution()
 {
+	assert(!valid());
 }
 UnitType::UnitType(
 		 const std::string& name,

@@ -5,6 +5,8 @@
 #include <string>
 #include <Force.h>
 
+///Represents a fight in which multple forces are fighting
+///@note this is mainly for swig
 class Fight {
 public:
 	Fight();
@@ -17,6 +19,7 @@ public:
 	
 	std::string toString() const;
 	
+	///The forces that are fighting
 	std::vector<Force> forces;
 };
 

@@ -6,15 +6,24 @@
 #include <map>
 #include <Fight.h>
 
+///Class to callculate a Fight.
 class BattleCalculator {
 public:
-	BattleCalculator(double damageFactor);
+	///Creates a BattleCalculator.
+	///@param damageFactor all the damageValues during a fight will be multiplied by this factor
+	BattleCalculator(double damageFactor = 1.0);
 	
+	///Callculate one tick of a fight
+	///@param fight the fight
+	///@return returns true if the fight is over
 	bool callculateOneTick(Fight& fight) const;
+	///Callculate one tick of a fight
 	///@param forces fighting forces
-	///@return returns if the fight is over
+	///@return returns true if the fight is over
 	bool callculateOneTick(std::vector<Force>& forces) const;
 	
+	///All the damageValues during a fight will be multiplied by this factor.
+	///This helps to control the number of ticks needed until a fight is over (bigger = faster, smaller = slower).
 	double damageFactor;
 	
 private:

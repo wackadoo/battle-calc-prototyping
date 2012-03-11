@@ -1,11 +1,12 @@
 #include <Army.h>
 
-Army::Army(const std::map<UnitType::IdType, size_t>& numUnits) : numUnits(numUnits), name() {}
+Army::Army(const std::string& name, const std::map<UnitType::IdType, size_t>& numUnits) : numUnits(numUnits), name(name) {}
+Army::Army(const std::map<UnitType::IdType, size_t>& numUnits) : numUnits(numUnits), name("") {}
 Army::Army(const Army& other) : numUnits(other.numUnits), name(other.name) {}
 Army::Army(const std::string& name): numUnits(), name(name) {
 
 }
-Army::Army() {}
+Army::Army() : numUnits(), name("") {}
 
 bool Army::hasUnits() const {
 	std::map<UnitType::IdType, size_t>::const_iterator uIt;
