@@ -137,13 +137,19 @@ def parse_battle(params)
 				unit.unitCategoryId = type[:category]
 				
 				unit.baseDamage = type[:attack]
+				unit.baseDamage = unitsParams["baseDamage"].to_f unless unitsParams["baseDamage"].nil?
 				unit.criticalDamage = type[:critical_hit_damage]
+				unit.criticalDamage = unitsParams["criticalDamage"].to_f unless unitsParams["criticalDamage"].nil?
 				unit.criticalProbability = type[:critical_hit_chance]
+				unit.criticalProbability = unitsParams["criticalProbability"].to_f unless unitsParams["criticalProbability"].nil?
 				
 				unit.initiative = type[:initiative]
+				unit.initiative = unitsParams["initiative"].to_i unless unitsParams["initiative"].nil?
 
 				unit.hitpoints = type[:hitpoints]
+				unit.hitpoints = unitsParams["hitpoints"].to_f unless unitsParams["hitpoints"].nil?
 				unit.armor = type[:armor]
+				unit.armor = unitsParams["armor"].to_f unless unitsParams["armor"].nil?
 				#unit.xpFactorPerSet = 1.0 #TODO not implemented in the XML
 
 				@armies[fi][ai].addUnit(unit)
@@ -154,9 +160,11 @@ def parse_battle(params)
 	battle
 end
 
-get '/' do
+def handle_request(params)
 	@rules = GameRules.the_rules
 	battle = parse_battle(params["units"])
+	puts "BATTLE VALID?"
+	puts battle.isValid
 	#puts @rules.unit_categories
 
 	@num_rounds = 18
@@ -180,4 +188,13 @@ get '/' do
 	end
 
 	haml :index, :format => :html5
+end
+
+set :public_folder, File.dirname(__FILE__)
+
+get '/' do
+	handle_request(params)
+end
+post '/' do
+	handle_request(params)
 end

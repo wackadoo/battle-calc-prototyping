@@ -1,16 +1,21 @@
 %html
 	%head 
 		%title Kampfulator
+		%script{:type => "text/javascript", :language => "JavaScript", :src => "jquery-1.7.2.min.js"}
 		%style{:type => "text/css"}
 			:plain
 				table, tr, td, th {
 					border: 1px solid black;
 					border-collapse: collapse;
 					padding: 2px 6px;
+					vertical-align: top;
+				}
+				.closed {
+					display: none;
 				}
 	%body
 		%h1 Kampfulator: 
-		%form{ :action => "", :method => "get"}
+		%form{ :action => "", :method => "post"}
 			- (0...@units.length).each do |fi|
 				%h2= "Faction "+fi.to_s
 				- (0...@units[fi].length).each do |ai|
@@ -21,6 +26,33 @@
 								%td= get_type_name(k)
 								%td
 									%input{ :type => "text", :name => "units[#{fi}][#{ai}][#{k}][numUnitsAtStart]", :value => @units[fi][ai][k].numUnitsAtStart }
+									%a{ :href => "#", :class => "unit_details_a"} Details
+									.unit_details{ :class => "closed"}
+										%table
+											%tr
+												%td base damage
+												%td 
+													%input{ :type => "text", :name => "units[#{fi}][#{ai}][#{k}][baseDamage]", :value => @units[fi][ai][k].baseDamage }
+											%tr
+												%td critical damage
+												%td 
+													%input{ :type => "text", :name => "units[#{fi}][#{ai}][#{k}][criticalDamage]", :value => @units[fi][ai][k].criticalDamage }
+											%tr
+												%td critical probability
+												%td 
+													%input{ :type => "text", :name => "units[#{fi}][#{ai}][#{k}][criticalProbability]", :value => @units[fi][ai][k].criticalProbability }
+											%tr
+												%td initiative
+												%td 
+													%input{ :type => "text", :name => "units[#{fi}][#{ai}][#{k}][initiative]", :value => @units[fi][ai][k].initiative }
+											%tr
+												%td hitpoints
+												%td 
+													%input{ :type => "text", :name => "units[#{fi}][#{ai}][#{k}][hitpoints]", :value => @units[fi][ai][k].hitpoints }
+											%tr
+												%td armor
+												%td 
+													%input{ :type => "text", :name => "units[#{fi}][#{ai}][#{k}][armor]", :value => @units[fi][ai][k].armor }
 			%br
 			%br
 			%table
@@ -31,6 +63,15 @@
 
 			%br
 			%input{ :type => "submit", :value => "Fight"}
+			%script
+				:plain
+					$(".unit_details_a").click(function () {
+						if ($(this).parent().find(".unit_details").hasClass('closed')) {
+							$(this).parent().find(".unit_details").removeClass('closed');
+						} else {
+							$(this).parent().find(".unit_details").addClass('closed');
+						}
+					});
 		%h1 Kampfbericht
 		- (0...@rounds.length).each do |ri|
 			%hr
