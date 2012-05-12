@@ -1,106 +1,183 @@
 require 'sinatra'
 require 'awe_native_extensions'
 require 'haml'
+require './rules'
 
-def parse_classes(params)
-  return {} if params.nil?
-  re = Hash.new
-  params.each {|x| re[x["name"]] = Battle::UnitClass.new(x["name"]) unless (!x.has_key?("name") || x["name"].empty?) }
-  re
+def copy_battle(battle)
+	result = Battle::Battle.new
+	puts "categories:"
+	(0...battle.numUnitCategories).each {
+		|ci|
+		category = Battle::UnitCategory.new(battle.getUnitCategory(ci).categoryId)
+		category.test = battle.getUnitCategory(ci).test
+		result.addUnitCategory(category)
+	}
+	(0...battle.numFactions).each {
+		|fi|
+		oldFaction = battle.getFaction(fi)
+		faction = Battle::Faction.new
+		result.addFaction(faction)
+		(0...oldFaction.numArmies).each {
+			|ai|
+			oldArmy = oldFaction.getArmy(ai)
+			army = Battle::Army.new(oldArmy.playerId)
+			faction.addArmy(army)
+			(0...oldArmy.numUnits).each {
+				|ui|
+				army.addUnit(Battle::Unit.new(oldArmy.getUnit(ui)))
+			}
+		}
+	}
+	result
 end
 
-def get_type_float_field_setters
-  re = Hash.new
-  dummy = Battle::UnitType.new
-  Battle::UnitType.instance_methods.reject{ 
-    |x| 
-    !(x.to_s.end_with?("=") && x.to_s.size > 3 && dummy.send(x.to_s[0...-1]).kind_of?(Float))
-  }.each{
-    |x|
-    re[x.to_s[0...-1]] = x
-  }
-  re
+def reset_battle_vars(battle) 
+	(0...battle.numFactions).each {
+		|fi|
+		faction = battle.getFaction(fi)
+		(0...faction.numArmies).each {
+			|ai|
+			army = faction.getArmy(ai)
+			(0...army.numUnits).each {
+				|ui|
+				unit = army.getUnit(ui)
+
+				unit.numUnitsAtStart -= unit.numDeaths;
+				unit.numDeaths = 0
+				unit.numHits = 0
+				unit.numKills = 0
+				unit.newXp = 0
+				unit.damageTaken = 0
+				unit.damageInflicted = 0 
+			}
+		}
+	}
 end
 
-def parse_fight(params, types)
-  re = Battle::Fight.new
-  
-  f1 = Battle::Force.new
-  f1.isAttacker = true
-  a1 = Battle::Army.new
-  a1.name = "Army1"
-  if params.kind_of?(Hash) && params["0"].kind_of?(Hash) && params["0"]["Army1"].kind_of?(Hash)
-    puts "fooo"
-    params["0"]["Army1"].each {
-      |k,v|
-      puts "#{k} => #{v}"
-      a1.setNumUnits(types[k].getId, v.to_i)
-    }
-  end
-  f1.addArmy(a1)
-  re.addForce(f1)
-  
-  f2 = Battle::Force.new
-  f2.isDefender = true
-  a2 = Battle::Army.new
-  a2.name = "Army2"
-  if params.kind_of?(Hash) && params["1"].kind_of?(Hash) && params["1"]["Army2"].kind_of?(Hash)
-    params["1"]["Army2"].each {
-      |k,v|
-      puts "#{k} => #{v}"
-      a2.setNumUnits(types[k].getId, v.to_i)
-    }
-  end
-  f2.addArmy(a2)
-  re.addForce(f2)
-  
-  re
+def get_type_name(id)
+	@rules.unit_types.each{
+		|type|
+		return type[:name][:en_US] if type[:id] == id
+	} 
 end
 
-def parse_types(params, float_field_setters, classes)
-  return {} if params.nil?
-  dummy = Battle::UnitType.new
-  re = Hash.new
-  params.each {
-    |k,v|
-    if !(v["name"].nil? || v["name"].empty?)
-      re[v["name"]] = Battle::UnitType.new 
-      re[v["name"]].name = v["name"]
-      re[v["name"]].unitClass = classes[v["unitClass"]].getId
-      float_field_setters.each {
-        |k2,v2|
-        re[v["name"]].send(v2, v[k2].to_f) if v.has_key? k2
-      }
-      
-      v["weight"].each {
-        |k2,v2|
-        re[v["name"]].setDamageDistribution(classes[k2].getId, v2.to_f)
-      } if v["weight"].kind_of?(Hash)
-    end
-  }
-  re
+def parse_battle(params)
+	#puts params
+	params = {} if params.nil?
+	battle = Battle::Battle.new
+	#categories
+	@rules.unit_categories.each {
+		|c|
+		category = Battle::UnitCategory.new(c[:id])
+
+		if c[:target_priorities][:test_type] == :no_test
+			test = Battle::NoTest.new
+			c[:target_priorities][:results][0].each {
+				|i|
+				test.pushCategoryToPriority(i)
+			}
+			category.test = test
+		elsif c[:target_priorities][:test_type] == :line_size_test
+			test = Battle::LineSizeTest.new(c[:target_priorities][:test_category].to_i)
+			c[:target_priorities][:results][0].each {
+				|i|
+				test.pushCategoryToPriorityOnSuccess(i)
+			}
+			c[:target_priorities][:results][1].each {
+				|i|
+				test.pushCategoryToPriorityOnFail(i)
+			} 
+			category.test = test
+		else
+			raise "unknown test"
+		end
+		battle.addUnitCategory(category)
+	}
+	
+
+	#faction
+	factions = [Battle::Faction.new, Battle::Faction.new]
+	battle.addFaction(factions[0])
+	battle.addFaction(factions[1])
+	@armies = [[Battle::Army.new(0)],[Battle::Army.new(1)]]
+	factions[0].addArmy(@armies[0][0])
+	factions[1].addArmy(@armies[1][0])
+	@units = [[{}],[{}]]
+
+	#faction 1 army 1.1
+	@rules.unit_types.each {
+		|type|
+		(0...@units.length).each{
+			|fi|
+			force = @units[fi]
+			forceParams = {}
+			forceParams = params[fi.to_s] unless params[fi.to_s].nil?
+			#puts forceParams
+			(0...force.length).each{
+				|ai|
+				army = force[ai]
+				armyParams = {}
+				#puts 
+				armyParams = forceParams[ai.to_s] unless forceParams[ai.to_s].nil?
+				unitsParams = {}
+				puts "type[id]"
+				puts type[:id]
+				puts "armyParams.nil?"
+				puts armyParams.nil?
+				unitsParams = armyParams[type[:id].to_s] unless armyParams[type[:id].to_s].nil?
+				puts unitsParams
+				unit = Battle::Unit.new
+				#puts unit.methods
+
+				army[type[:id]]  = unit
+				unit.numUnitsAtStart = 0
+				unit.numUnitsAtStart = unitsParams["numUnitsAtStart"].to_i unless unitsParams["numUnitsAtStart"].nil?
+
+				unit.unitTypeId = type[:id]
+				unit.unitCategoryId = type[:category]
+				
+				unit.baseDamage = type[:attack]
+				unit.criticalDamage = type[:critical_hit_damage]
+				unit.criticalProbability = type[:critical_hit_chance]
+				
+				unit.initiative = type[:initiative]
+
+				unit.hitpoints = type[:hitpoints]
+				unit.armor = type[:armor]
+				#unit.xpFactorPerSet = 1.0 #TODO not implemented in the XML
+
+				@armies[fi][ai].addUnit(unit)
+			}
+		}
+	}
+
+	battle
 end
 
 get '/' do
-  puts params
-  @classes = parse_classes(params["classes"])
-  @type_float_fields = get_type_float_field_setters
-  @types = parse_types(params["types"], @type_float_fields, @classes)
-  @fight = parse_fight(params["forces"], @types)
-  
-  @fight_log = "";
-  bc = Battle::BattleCalculator.new(1.0)
-  fight_done = false
-  @fight_after = Battle::Fight.new(@fight)
+	@rules = GameRules.the_rules
+	battle = parse_battle(params["units"])
+	#puts @rules.unit_categories
 
-  while !fight_done do
-    @fight_log += "before tick\n"
-    @fight_log += @fight_after.toString+"\n"
-    fight_done = bc.callculateOneTick(@fight_after)
-    @fight_log += "after tick"+"\n"
-    @fight_log += @fight_after.toString+"\n"
-  end
-  
-	#erb (:index, {:foo => {:d => "sup"}})
+	@num_rounds = 18
+	@num_rounds = params["num_rounds"].to_i unless params["num_rounds"].nil?
+	@rounds = []
+
+	unless params["units"].nil?
+		puts "fight start"
+		bc = Battle::BattleCalculator.new
+		@rounds.push(battle)
+		puts @rounds
+		(1..@num_rounds).each {
+			|i|
+			currBattle = copy_battle(@rounds[i-1])
+			reset_battle_vars(currBattle)
+			puts "asdf"
+			bc.callculateOneTick(currBattle)
+			@rounds.push(currBattle)
+		}
+
+	end
+
 	haml :index, :format => :html5
 end

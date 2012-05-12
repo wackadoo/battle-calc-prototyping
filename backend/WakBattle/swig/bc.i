@@ -28,4 +28,3 @@
 #   %template(MapUnitClassSize) map<::UnitClass::IdType,size_t>; 
 #   %template(MapUnitTypeSize) map<::UnitType::IdType,size_t>;
 # };
-

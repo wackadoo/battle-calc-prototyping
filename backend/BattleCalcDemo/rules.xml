@@ -1,0 +1,268 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE Rules SYSTEM "rules.dtd">
+
+<!-- WACK-A-DOO game rules. 
+
+     These are the rules for the game Wack-A-Doo that uses the Augmentd Worlds
+     Engine (AWE) developed by 5d lab. The rules in here need to be a
+     well-formed document concerning AWE'S rules.dtd defining valid entities
+     and properties. This document is used to automatically instantiate an
+     appropriate database, ruby and C/C++ source files to be used inside the
+     Augmented Worlds Engine. The contents of this file are also automatically
+     communicated to a game client connecting to the game instance.
+     
+     Versioning: The versioning scheme of this file MUST adheren strictly to
+                 the following rules in order to guarantee correct functioning
+                 of ticker, backend and client:
+                 
+                 A) the version number consists of a major, minor and build 
+                    number, all seperated by colons (major.minor.build).
+                 B) with EVERY SINGLE edit & commit of this file the version
+                    number has to be incremented.
+                 C) The build number may be incremented for 'beautification'
+                    changes. This are changes that don't change the game-logic
+                    but only concern the meta information like names and 
+                    descriptions.
+                 D) The minor number has to be incremented for changes that
+                    do concern the game mechanics, but that are small enough
+                    to only need a reload of the rules by the client or a 
+                    restart of the backend to be in sync again. Examples are
+                    changes to attribute values or formulas. Introduction of
+                    new entities (e.g. a new unit) or new attributes are no
+                    examples of a minor change.
+                 E) The major number has to be incremented for all changes 
+                    that do not only need a reload to sync everything, but
+                    that do or might need a change of source code, either
+                    in backend or clients, or a modification of the database.
+                    Examples are the introduction of a new unit (need a new
+                    database field for that) or a new attribute (need to 
+                    implement logic for this). 
+                 F) When incrementing a minor of major version, the lower
+                    numbers MUST be reset to zero (e.g. 1.283.13 would be 
+                    incremented on the major to 2.0.0).
+                  
+                 A client would reload the rules when it detects a higher 
+                 minor number on the server. It would reload itself when 
+                 detecting a higher major number than expected in the hope
+                 of finding a newer client-version that matches the rules
+                 major number on the server. A client would do nothing for
+                 a newer build, as those changes could be loaded with the 
+                 next login.
+                 
+                 A server needs to be restarted for a new minor version to
+                 take effect and to be in sync with ticker and clients. It
+                 would not even start, if the rule's major version is higher
+                 than expected, as the server would be likely to miss 
+                 necessary database fields or game logic. The ticker behaves
+                 exactly the same.
+                 
+                 ATTENTION: VERSION CHECKING IS NOT YET IMPLEMENTED, NOT IN
+                            CLIENT, SERVER, NOR TICKER.
+          
+     Authors: David Canela <david@5dlab.com>,
+              Sascha Lange <sascha@5dlab.com>,
+              Patrick Fox <patrick@5dlab.com>,
+              Hajo Runne <hajo@5dlab.com>
+     
+     All rights reserved, (c) 5D Lab GmbH, 2012. 
+     
+-->
+<Rules>
+  <General>
+    <Game branch="development" tag="alpha">Wack-A-Doo</Game>
+    <Version major="1" minor="0" build="0" />
+    <Languages>
+      <Language locale="en_US">English (US)</Language>
+      <Language locale="de_DE">Deutsch</Language>
+    </Languages>
+  </General>
+  <UnitCategories>
+    <UnitCategory id="infantry">
+      <Name>Infantry</Name>
+      <Name lang="de_DE">Fußtruppen</Name>
+      <Description>
+        <p>English description here.</p>
+      </Description>
+      <Description lang="de_DE">
+        <p>Infanterie ist die Basiseinheit in jeder Truppe. Sie schützt Fernkämpfer vor direkt Angriffen und kann, wenn in ausreichender Zahl vorhanden, auch Flankenangriffe abwehren.</p>
+      </Description>
+      <Ability id="prevent-flanking" />
+			<TargetPriorities testType="no_test">
+				<TargetList>
+					<Target id="infantry" />
+					<Target id="cavalry" />
+					<Target id="artillery" />
+				</TargetList>
+			</TargetPriorities>
+    </UnitCategory>
+    <UnitCategory id="cavalry">
+      <Name>cavalry</Name>
+      <Name lang="de_DE">Reiter</Name>
+      <Description>
+        <p>English description here.</p>
+      </Description>
+      <Description lang="de_DE">
+        <p>Berittene Einheiten bewegen sich schnell auf dem Schlachtfeld, und sind als einzige in der Lage, die gegnerischen Fußtruppen zu umgehen und feindliche Fernkämpfer direkt anzugreifen (Flankenangriff).</p>
+      </Description>
+      <Ability id="flanking" />
+			<TargetPriorities testType="line_size_test" testCategory="infantry">
+				<TargetList>
+					<Target id="cavalry" />
+					<Target id="artillery" />
+					<Target id="infantry" />
+				</TargetList>
+				<TargetList>
+					<Target id="cavalry" />
+					<Target id="infantry" />
+					<Target id="artillery" />
+				</TargetList>
+			</TargetPriorities>
+    </UnitCategory>
+    <UnitCategory id="artillery">
+      <Name>artillery</Name>
+      <Name lang="de_DE">Fernkämpfer</Name>
+      <Description>
+        <p>English description here.</p>
+      </Description>
+      <Description lang="de_DE">
+        <p>Die Fernkämpfer schießen aus sicherer Distanz auf den Gegner, vorzugsweise auf Fußsoldaten. Im Nahkampf sind sie extrem anfällig.</p>
+      </Description>
+			<TargetPriorities testType="no_test">
+				<TargetList>
+					<Target id="infantry" />
+					<Target id="artillery" />
+					<Target id="cavalry" />
+				</TargetList>
+			</TargetPriorities>
+    </UnitCategory>
+  </UnitCategories>
+  <UnitTypes>
+    <Unit id="thrower" category="artillery">
+      <Name>Stone Hurler</Name>
+      <Name lang="de_DE">Kieselsteinwerfer</Name>
+      <Description lang="de_DE">
+        <p>Große Steine, kleine Steine, ein Kieselsteinwerfer mag sie alle, solange er sie jemandem an den Kopf werfen kann. Ok, zugegeben, die kleinen mag er ein bisschen lieber. Nichtsdestotrotz kann er moderaten kritischen Schaden zufügen - denn, wie jeder weiß, das kann auch ins Auge gehen.</p> 
+      </Description>
+      <Description lang="en_US">
+        <p>Small Stones, big Stones, a Stone Hurler likes them all, as long as he can throw them at people. Ok, granted, the small ones are slightly prefered... Nevertheless, he may inflict moderate critical damage by sometimes hitting an opponent's eye.'</p>
+      </Description>
+      <Velocity>1</Velocity>
+      <ActionPoints>4</ActionPoints>
+      <Initiative>8</Initiative>
+      <Attack>18</Attack>
+      <CriticalDamage chance="0.01">10</CriticalDamage>
+      <Armor>2</Armor>
+      <Overrunnable>true</Overrunnable>
+      <Hitpoints>90</Hitpoints>
+      <Effectiveness category="infantry">1</Effectiveness>
+      <Effectiveness category="cavalry">0.3</Effectiveness>
+      <Effectiveness category="artillery">0.75</Effectiveness>
+    </Unit>
+    <Unit id="skewer" category="infantry">
+      <Name>Skewer</Name>
+      <Name lang="de_DE">Bratspießträger</Name>
+      <Description lang="de_DE">
+        <p>Der Umgang mit der Waffe ist schnell gelernt: Das spitze Ende muss nach vorn!</p> 
+      </Description>
+      <Description lang="en_US">
+        <p>Skewer Crew training 101: stick'em with the pointy end!</p>
+      </Description>
+      <Velocity>1</Velocity>
+      <ActionPoints>4</ActionPoints>
+      <Initiative>15</Initiative>
+      <Attack>14</Attack>
+      <CriticalDamage chance="0.01" >6</CriticalDamage>
+      <Armor>14</Armor>
+      <Overrunnable>true</Overrunnable>
+      <Hitpoints>90</Hitpoints>
+      <Effectiveness category="infantry">0.6</Effectiveness><!-- due to the long weapon reduced effectivity against infantry but full effectivity against cavalry. a standard infantry (short weapon) would have effectivity 1 against infantry and reduced effictivity against cavalry, right?! -->
+      <Effectiveness category="cavalry">1</Effectiveness>
+      <Effectiveness category="artillery">1</Effectiveness>
+    </Unit>
+    <Unit id="light_cavalry" category="cavalry">
+      <Name>Ostrich Riders</Name>
+      <Name lang="de_DE">Straußenreiter</Name>
+      <Description lang="de_DE">
+        <p>Die Straußenreiter sind äußerst schnell, dafür aber nur schwach gepanzert.</p> 
+      </Description>
+      <Description lang="en_US">
+        <p>Ostrich riders are very quick, but only lightly armored.</p>
+      </Description>
+      <Velocity>1.5</Velocity>
+      <ActionPoints>5</ActionPoints>
+      <Initiative>26</Initiative>
+      <Attack>16</Attack>
+      <CriticalDamage chance="0.01">10</CriticalDamage>
+      <Armor>3</Armor>
+      <Overrunnable>true</Overrunnable>
+      <Hitpoints>95</Hitpoints>
+      <Effectiveness category="infantry">0.3</Effectiveness>
+      <Effectiveness category="cavalry">0.75</Effectiveness>
+      <Effectiveness category="artillery">1</Effectiveness>
+    </Unit>
+    <Unit id="tree_huggers" category="infantry">
+      <Name>Tree Huggers</Name>
+      <Name lang="de_DE">Baum-Brutalos</Name>
+      <Description lang="de_DE">
+        <p>Baum-Brutalos sind Tier2-Einheiten</p> 
+      </Description>
+      <Description lang="en_US">
+        <p>What Tree-Huggers lack in brains, they make up for with sheer strength.</p>
+      </Description>
+      <Velocity>0.95</Velocity>
+      <ActionPoints>4</ActionPoints>
+      <Initiative>14</Initiative>
+      <Attack>20</Attack>
+      <CriticalDamage chance="0.02">9</CriticalDamage>
+      <Armor>4</Armor>
+      <Overrunnable>true</Overrunnable>
+      <Hitpoints>140</Hitpoints>
+      <Effectiveness category="infantry">0.8</Effectiveness>
+      <Effectiveness category="cavalry">1</Effectiveness>
+      <Effectiveness category="artillery">0,8</Effectiveness>
+    </Unit>
+	  <Unit id="sabre_riders" category="cavalry">
+      <Name>Sabretooth-Riders</Name>
+      <Name lang="de_DE">Säbelzahnreiter</Name>
+      <Description lang="de_DE">
+        <p>Viele fürchten die Reittiere mehr als die eigentlichen Reiter...</p> 
+      </Description>
+      <Description lang="en_US">
+        <p>It's not so much the riders themselves that are feared...</p>
+      </Description>
+      <Velocity>1.4</Velocity>
+      <ActionPoints>4</ActionPoints>
+      <Initiative>28</Initiative>
+      <Attack>21</Attack>
+      <CriticalDamage chance="0.02">14</CriticalDamage>
+      <Armor>15</Armor>
+      <Overrunnable>true</Overrunnable>
+      <Hitpoints>140</Hitpoints>
+      <Effectiveness category="infantry">0.4</Effectiveness>
+      <Effectiveness category="cavalry">0,6</Effectiveness>
+      <Effectiveness category="artillery">1</Effectiveness>
+    </Unit>
+    <Unit id="squirrel_hunters" category="artillery">
+      <Name>Squirrel-Hunters</Name>
+      <Name lang="de_DE">Hörnchen-Jäger</Name>
+      <Description lang="de_DE">
+        <p>T2 Sniper-Einheit, braucht noch guten Namen.</p> 
+      </Description>
+      <Description lang="en_US">
+        <p>Used to shooting at small furry animals, these guys are great at aiming.</p>
+      </Description>
+      <Velocity>1</Velocity>
+      <ActionPoints>4</ActionPoints>
+      <Initiative>7</Initiative>
+      <Attack>19</Attack>
+      <CriticalDamage chance="0.2">19</CriticalDamage>
+      <Armor>0</Armor>
+      <Overrunnable>true</Overrunnable>
+      <Hitpoints>100</Hitpoints>
+      <Effectiveness category="infantry">1</Effectiveness>
+      <Effectiveness category="cavalry">0,4</Effectiveness>
+      <Effectiveness category="artillery">0,7</Effectiveness>
+    </Unit>
+	</UnitTypes>
+	
+</Rules>

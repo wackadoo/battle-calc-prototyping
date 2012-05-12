@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!ELEMENT Rules (General, Languages?, ResourceTypes?, BuildingTypes?, ScienceTypes?, UnitCategories?, UnitTypes?)>
+<!ELEMENT General (Game, Version, Languages)>
+<!ELEMENT Game (#PCDATA)>
+<!ATTLIST Game 
+  branch CDATA #REQUIRED
+  tag CDATA #IMPLIED
+>
+<!ELEMENT Version EMPTY>
+<!ATTLIST Version 
+  major CDATA #REQUIRED
+  minor CDATA #REQUIRED
+  build CDATA #REQUIRED
+>
+
+<!--Languages-->
+<!ELEMENT Languages (Language*)>
+<!ELEMENT Language (#PCDATA)>
+<!ATTLIST Language locale ID #REQUIRED>
+
+<!--Types-->
+<!ELEMENT ResourceTypes (Resource*)>
+<!ELEMENT BuildingTypes (Building*)>
+<!ELEMENT ScienceTypes (Science*)>
+<!ELEMENT UnitTypes (Unit*)>
+<!ELEMENT UnitCategories (UnitCategory*)>
+
+<!--Resource-->
+<!ELEMENT Resource (Name+, RatingValue, TakeoverValue, StealRatio, DestroyRatio, SafeStorage, MaxStorage, Production)>
+<!ATTLIST Resource id ID #REQUIRED hidden (0 | 1) "0">
+
+<!--Building-->
+<!ELEMENT Building (Name+, Description+, Position?, RatingValue, Cost*, ProductionTime, MaxDevelopmentLevel, (Requirement | EffectReq)*)>
+<!ATTLIST Building id ID #REQUIRED hidden (0 | 1) "0">
+
+<!--Science-->
+<!ELEMENT Science (Name+, Description+, Position?, Cost*, ProductionTime, MaxDevelopmentLevel, (Requirement | EffectReq)*)>
+<!ATTLIST Science id ID #REQUIRED hidden (0 | 1) "0">
+
+<!--Unit-->
+<!ELEMENT UnitCategory (Name+, Description+, Position?, Ability*, TargetPriorities?)>
+<!ATTLIST UnitCategory 
+  id ID #REQUIRED 
+>
+<!ELEMENT Unit (Name+, Description+, Position?, Velocity, ActionPoints, Initiative, Attack, CriticalDamage, Armor, Overrunnable, Hitpoints, Effectiveness*, Encumbrance*)>
+<!ATTLIST Unit 
+  id ID #REQUIRED 
+  category IDREF #REQUIRED
+>
+
+<!ELEMENT TargetPriorities (TargetList, TargetList)>
+<!ATTLIST TargetPriorities
+	testType CDATA #REQUIRED
+	testCategory IDREF #IMPLIED
+>
+
+<!ELEMENT TargetList (Target)>
+<!ELEMENT Target EMPTY>
+<!ATTLIST Target
+ id IDREF #REQUIRED
+>
+
+
+<!--Webinterface: Production-->
+<!ELEMENT Cost (#PCDATA | object)*>
+<!ATTLIST Cost id IDREF #REQUIRED>
+<!ELEMENT object EMPTY>
+<!ATTLIST object id IDREF #REQUIRED>
+
+<!--Ability-->
+<!ELEMENT Ability EMPTY>
+<!ATTLIST Ability
+ id CDATA #REQUIRED
+>
+
+<!--Requirement-->
+<!ELEMENT Requirement EMPTY>
+<!ATTLIST Requirement id IDREF #REQUIRED min CDATA "0" max CDATA #IMPLIED>
+<!ELEMENT EffectReq EMPTY>
+<!ATTLIST EffectReq id IDREF #REQUIRED min CDATA #IMPLIED max CDATA #IMPLIED>
+
+<!--Encumbrance-->
+<!ELEMENT Encumbrance EMPTY>
+<!ATTLIST Encumbrance id IDREF #REQUIRED value CDATA #REQUIRED>
+
+<!--Combat-->
+<!ELEMENT Initiative (#PCDATA)>
+<!ELEMENT Attack (#PCDATA)>
+<!ELEMENT CriticalDamage (#PCDATA)>
+<!ATTLIST CriticalDamage 
+  chance CDATA #REQUIRED
+>
+<!ELEMENT Armor (#PCDATA)>
+<!ELEMENT Hitpoints (#PCDATA)>
+<!ELEMENT Overrunnable (#PCDATA)>
+<!ELEMENT Effectiveness (#PCDATA)>
+<!ATTLIST Effectiveness 
+  category IDREF #REQUIRED
+>
+
+<!--Common Leafs-->
+<!ELEMENT Description (p*)>
+<!ATTLIST Description lang IDREF "en_US">
+<!ELEMENT Name (#PCDATA)>
+<!ATTLIST Name lang IDREF "en_US">
+<!ELEMENT p (#PCDATA)>
+<!ELEMENT Position (#PCDATA)>
+<!ELEMENT Velocity (#PCDATA)>
+<!ELEMENT ActionPoints (#PCDATA)>
+
+<!--entities-->
+<!ENTITY apst "&amp;#39;">
+<!ENTITY auml "&amp;auml;">
+<!ENTITY ouml "&amp;ouml;">
+<!ENTITY uuml "&amp;uuml;">
+<!ENTITY Auml "&amp;Auml;">
+<!ENTITY Ouml "&amp;Ouml;">
+<!ENTITY Uuml "&amp;Uuml;">
+<!ENTITY szlig "&amp;szlig;">
