@@ -97,7 +97,7 @@ class GameRules
   # be modified by the program. Uses conditional assignment to construct the
   # rules object on first access.
   def self.the_rules
-    @the_rules ||= GameRules::Rules.new(
+    @the_rules ||= GameRules.new(
   ]]></xsl:text>
         :version => { :major => <xsl:value-of select="//General/Version/@major" />, 
                       :minor => <xsl:value-of select="//General/Version/@minor" />, 
