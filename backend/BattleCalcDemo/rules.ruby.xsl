@@ -69,12 +69,13 @@
 # sciences in this particular game.
 class GameRules
 
-  attr_accessor :version, :resource_types, :unit_types, :building_types, :science_types, :unit_categories
+  attr_accessor :version, :resource_types, :unit_types, :building_types, :science_types, :unit_categories, :building_categories
   
   def attributes 
     { 
       'version'        => version,
       'unit_categories'=> unit_categories,
+      'building_categories'=> building_categories,
       'unit_types'     => unit_types,
       'resource_types' => resource_types,
       'building_types' => building_types,
@@ -106,6 +107,7 @@ class GameRules
 
   <xsl:apply-templates select="UnitCategories" />
   <xsl:apply-templates select="UnitTypes" />
+  <xsl:apply-templates select="BuildingCategories" />
 
   <xsl:text><![CDATA[
     )
@@ -132,6 +134,10 @@ end
 <xsl:template match="Description">
             :<xsl:value-of select="@lang"/> => "<xsl:apply-templates/>",
   </xsl:template> <!-- indentation needed for proper layout in output. -->
+  
+  <xsl:template match="Effectiveness">
+            :<xsl:value-of select="@category"/> => <xsl:apply-templates/>,
+  </xsl:template> <!-- indentation needed for proper layout in output. -->
 	
 <xsl:template match="p">&lt;p&gt;<xsl:apply-templates/>&lt;/p&gt;</xsl:template>
 
@@ -147,6 +153,9 @@ end
           :db_field    => :unit_<xsl:value-of select="@id"/>,
           :name        => {
             <xsl:apply-templates select="Name" />              
+          },
+          :effectiveness => {
+            <xsl:apply-templates select="Effectiveness" />              
           },
           :description => {
             <xsl:apply-templates select="Description" />              
@@ -234,6 +243,30 @@ end
         },              #   END OF <xsl:value-of select="Name"/>
 </xsl:for-each>
       ],                # END OF UNIT CATEGORIES
+</xsl:template>
+
+
+
+
+<xsl:template match="BuildingCategories">
+  
+      :building_categories => [  # ALL BUILDING CATEGORIES
+<xsl:for-each select="BuildingCategory">
+        {               #   <xsl:value-of select="Name"/>
+          :id          => <xsl:value-of select="position()-1"/>, 
+          :symbolic_id => :<xsl:value-of select="@id"/>,
+          :name        => {
+            <xsl:apply-templates select="Name" />              
+          },
+          :description => {
+            <xsl:apply-templates select="Description" />              
+          },
+<xsl:if test="Position">
+	        :position    => <xsl:value-of select="Position"/>,
+</xsl:if>
+        },              #   END OF <xsl:value-of select="Name"/>
+</xsl:for-each>
+      ],                # END OF BUILDING CATEGORIES
 </xsl:template>
 
 

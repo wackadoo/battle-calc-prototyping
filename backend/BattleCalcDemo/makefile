@@ -1,2 +1,2 @@
 all:
-	xsltproc rules.ruby.xsl rules.xml > rules.rb
+	xsltproc --xinclude rules.ruby.xsl rules.xml > rules.rb
