@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE Rules SYSTEM "rules.dtd">
+
+<UnitTypes xmlns:xi="http://www.w3.org/2001/XInclude">
+  
+  <!-- ATTENTION: NEVER put any new unit inbetween two existing while a
+       round is running. Creating or deleting units there will cause a 
+       change of units IDs and mess up the database for the existing
+       players. Always add new unit, independent of their group or 
+       category, ONLY to the END OF the FILE. NEVER change the sequence. 
+       Only after a round has ended, those new units can be re-sorted. 
+       Afterwards you need to do a rake db:reset! -->  
+
+  <xi:include href="units/rules_units_clubbers.xml" /> 
+  <xi:include href="units/rules_units_tree_huggers.xml" />
+  
+  <xi:include href="units/rules_units_thrower.xml" />	
+  <xi:include href="units/rules_units_skewer.xml" />
+ 
+  <xi:include href="units/rules_units_light_cavalry.xml" />  
+  <xi:include href="units/rules_units_sabre_riders.xml" />  
+  
+  <xi:include href="units/rules_units_ram.xml" />    
+  <xi:include href="units/rules_units_catapult.xml" />
+    
+  <xi:include href="units/rules_units_neandertaler.xml" />  <!-- npc unit -->
+   
+  <xi:include href="units/rules_units_slingshot_warrior.xml" />
+   
+  <!-- ADD NEW units DIRECTLY ABOVE THIS LINE -->
+</UnitTypes>

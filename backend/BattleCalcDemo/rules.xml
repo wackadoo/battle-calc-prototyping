@@ -11,16 +11,16 @@
      Augmented Worlds Engine. The contents of this file are also automatically
      communicated to a game client connecting to the game instance.
      
-     Versioning: The versioning scheme of this file MUST adheren strictly to
+     Versioning: The versioning scheme of this file MUST adhere strictly to
                  the following rules in order to guarantee correct functioning
                  of ticker, backend and client:
                  
                  A) the version number consists of a major, minor and build 
-                    number, all seperated by colons (major.minor.build).
+                    number, all separated by colons (major.minor.build).
                  B) with EVERY SINGLE edit & commit of this file the version
                     number has to be incremented.
                  C) The build number may be incremented for 'beautification'
-                    changes. This are changes that don't change the game-logic
+                    changes. These are changes that don't change the game-logic
                     but only concern the meta information like names and 
                     descriptions.
                  D) The minor number has to be incremented for changes that
@@ -70,14 +70,21 @@
 <Rules xmlns:xi="http://www.w3.org/2001/XInclude">
   <General>
     <Game branch="development" tag="alpha">Wack-A-Doo</Game>
-    <Version major="1" minor="0" build="0" />
+    <Version major="0" minor="0" build="1" />
     <Languages>
       <Language locale="en_US">English (US)</Language>
       <Language locale="de_DE">Deutsch</Language>
     </Languages>
+    <Battle>
+      <Calculation roundTime="30" retreatProbability="0.6" />
+    </Battle>
+    <CharacterCreation>
+      <StartResource id="resource_wood">500</StartResource>
+      <StartResource id="resource_stone">500</StartResource>
+      <StartResource id="resource_fur">250</StartResource>
+      <StartResource id="resource_cash">5</StartResource>
+    </CharacterCreation>
   </General>
-  <xi:include href="rules_settlements.xml" />
-  <xi:include href="rules_units.xml"  />
-  <xi:include href="rules_unitcategories.xml"  />
-  <xi:include href="rules_buildings.xml"  />
+  <xi:include href="rules_units.xml" />
+  <xi:include href="rules_unitcategories.xml" />
 </Rules>

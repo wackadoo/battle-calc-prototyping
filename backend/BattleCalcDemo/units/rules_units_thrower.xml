@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE Rules SYSTEM "../rules.dtd">
+
+    <Unit id="thrower" category="unitcategory_artillery">
+      <Name>Pebble Thrower</Name>
+      <Name lang="de_DE">Kieselsteinwerfer</Name>
+  <Flavour lang="en_US">
+    <p>Kills opposing units.</p>
+  </Flavour>
+  <Flavour lang="de_DE">
+    <p>Kämpft gegen andere Einheiten.</p>
+  </Flavour>
+      <Description lang="de_DE">
+        <p>Große Steine, kleine Steine, ein Kieselsteinwerfer mag sie alle, solange er sie jemandem an den Kopf werfen kann. Ok, zugegeben, die kleinen mag er ein bisschen lieber. Nichtsdestotrotz kann er moderaten kritischen Schaden zufügen - denn, wie jeder weiß, das kann auch ins Auge gehen.</p> 
+      </Description>
+      <Description lang="en_US">
+        <p>Small Stones, big Stones, a Peeble Thrower likes them all, as long as he can throw them at people. Ok, granted, the small ones are slightly prefered... Nevertheless, he may inflict moderate critical damage by sometimes hitting an opponent's eye.'</p>
+      </Description>
+      <Cost id="resource_stone" round="true">12</Cost>  
+      <Cost id="resource_fur" round="true">2</Cost>    
+      <ProductionTime shortenable="true">500</ProductionTime>  
+      <Velocity>1</Velocity>
+      <ActionPoints>4</ActionPoints>
+      <Initiative>8</Initiative>
+      <Attack>18</Attack>
+      <CriticalDamage chance="0.01">10</CriticalDamage>
+      <Armor>2</Armor>
+      <Overrunnable>true</Overrunnable>
+      <Hitpoints>90</Hitpoints>
+      <Effectiveness category="unitcategory_infantry">1</Effectiveness>
+      <Effectiveness category="unitcategory_cavalry">0.3</Effectiveness>
+      <Effectiveness category="unitcategory_artillery">0.75</Effectiveness>
+      <Effectiveness category="unitcategory_siege">0.75</Effectiveness>   
+	  
+    </Unit>

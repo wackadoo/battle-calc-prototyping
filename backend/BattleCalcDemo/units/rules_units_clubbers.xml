@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE Rules SYSTEM "../rules.dtd">
+
+<Unit id="clubbers" category="unitcategory_infantry">
+  <Name>Club Warrior</Name>
+  <Name lang="de_DE">Keulenkrieger</Name>
+  
+  <Description lang="de_DE">
+    <p>Eine Keule in der Hand und immer an vorderster Front. Keulenkrieger brauchen nicht viel für ein glücklcihes Leben.</p>
+    <p>Zudem ist dieses meist sehr kurz.</p>		
+  </Description>
+  <Description lang="en_US">
+    <p>Actually armed with a club, the mace-men are in the front rank of all armies.</p>
+  </Description>
+  <Flavour lang="en_US">
+    <p>Kills opposing units.</p>
+  </Flavour>
+  <Flavour lang="de_DE">
+    <p>Kämpft gegen andere Einheiten.</p>
+  </Flavour>
+  <Cost id="resource_stone" round="true">40</Cost>  
+  <Cost id="resource_wood" round="true">20</Cost>    
+  <Cost id="resource_fur" round="true">12</Cost>    
+  <ProductionTime shortenable="true">1200</ProductionTime>  
+  <Velocity>1</Velocity>
+  <ActionPoints>4</ActionPoints>
+  <Initiative>16</Initiative>
+  <Attack>15</Attack>
+  <CriticalDamage chance="0.01">2</CriticalDamage>
+  <Armor>0</Armor>
+  <Overrunnable>true</Overrunnable>
+  <Hitpoints>90</Hitpoints>
+  <Effectiveness category="unitcategory_infantry">0.9</Effectiveness>
+  <Effectiveness category="unitcategory_cavalry">0.9</Effectiveness>
+  <Effectiveness category="unitcategory_artillery">0.7</Effectiveness>
+  <Effectiveness category="unitcategory_siege">0.8</Effectiveness>    
+</Unit>
