@@ -114,50 +114,51 @@
 								%b dmg log
 						- (0...army.numUnits).each do |ui|
 							- unit = army.getUnit(ui)
-							%tr
-								%td= get_type_name(unit.unitTypeId)
-								%td= unit.numUnitsAtStart.to_s+" - "+unit.numDeaths.to_s
-								%td= unit.numHits
-								%td= unit.numKills
-								%td= unit.newXp
-								%td= unit.damageTaken
-								%td= unit.damageInflicted
-								%td
-									%table
-										%tr
-											%td
-												%b target id
-											%td
-												%b target category id
-											%td
-												%b effectiveness
-											%td
-												%b overkill
-											%td
-												%b superority bonus
-											%td
-												%b rest probability
-											%td
-												%b rest success
-										- (0...unit.numDamageLogs).each do |li|
-											- (0...unit.numSubDamageLogs(li)).each do |sli|
-												- damageLog = unit.getDamageLog(li, sli)
-												%tr
-													%td= get_type_name(damageLog.targetId)
-													%td= get_category_name(damageLog.targetUnitCategoryId)
-													%td= damageLog.effectiveness
-													%td= damageLog.overkill
-													%td= damageLog.superorityBonus
-													%td= damageLog.restProbability
-													%td= damageLog.experimentSuccess
+							- if (unit.numUnitsAtStart > 0)
+								%tr
+									%td= get_type_name(unit.unitTypeId)
+									%td= unit.numUnitsAtStart.to_s+" - "+unit.numDeaths.to_s
+									%td= unit.numHits
+									%td= unit.numKills
+									%td= unit.newXp
+									%td= unit.damageTaken
+									%td= unit.damageInflicted
+									%td
+										%table
 											%tr
 												%td
+													%b target id
 												%td
+													%b target category id
 												%td
+													%b effectiveness
 												%td
+													%b overkill
 												%td
+													%b superority bonus
 												%td
+													%b rest probability
 												%td
+													%b rest success
+											- (0...unit.numDamageLogs).each do |li|
+												- (0...unit.numSubDamageLogs(li)).each do |sli|
+													- damageLog = unit.getDamageLog(li, sli)
+													%tr
+														%td= get_type_name(damageLog.targetId)
+														%td= get_category_name(damageLog.targetUnitCategoryId)
+														%td= damageLog.effectiveness
+														%td= damageLog.overkill
+														%td= damageLog.superorityBonus
+														%td= damageLog.restProbability
+														%td= damageLog.experimentSuccess
+												%tr
+													%td
+													%td
+													%td
+													%td
+													%td
+													%td
+													%td
 
 				- (0...faction.testResultsSize()).each do |ri|
 					- test_result = faction.getTestResult(ri)
