@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE Rules SYSTEM "../rules.dtd">
+
+	  <Unit id="ram" category="unitcategory_siege">
+      <Name>Battering Ram</Name>
+      <Name lang="de_DE">Rammbock</Name>
+      <Description lang="de_DE">
+        <p>Nur wenige wissen, dass der Name Rammbock von einem prähistorischen Tier aus der Unterfamilie der ziegenartigen (caprinae) abstammt.</p> 
+      </Description>
+      <Description lang="en_US">
+        <p>The battering ram is the lockpick of choice to open doors, gates and cracking down fortifications.</p>
+      </Description>
+      <Cost id="resource_stone" round="true">2</Cost>  
+      <Cost id="resource_wood" round="true">10</Cost>    
+      <Cost id="resource_fur" round="true">4</Cost>    
+      <ProductionTime shortenable="true">300</ProductionTime>  
+      <Velocity>0.9</Velocity>
+      <ActionPoints>4</ActionPoints>
+      <Initiative>16</Initiative>
+      <Attack>15</Attack>
+      <CriticalDamage chance="0.01">2</CriticalDamage>
+      <Armor>0</Armor>
+      <!--needs special ability: destroy wall level -->
+      <Overrunnable>true</Overrunnable>
+      <Hitpoints>90</Hitpoints>
+      <Effectiveness category="unitcategory_infantry">0.2</Effectiveness>
+      <Effectiveness category="unitcategory_cavalry">0.1</Effectiveness>
+      <Effectiveness category="unitcategory_artillery">0.2</Effectiveness>
+      <Effectiveness category="unitcategory_siege">1</Effectiveness>     
+    </Unit>

@@ -83,9 +83,9 @@ class GameRules::Rules
         },
         :character_creation => {
           :start_resources => {
-            0 => 500,
-1 => 500,
-2 => 250,
+            0 => 2000,
+1 => 2000,
+2 => 1500,
 3 => 5,
 
           },
@@ -1285,9 +1285,7 @@ class GameRules::Rules
 
             :unlock_garrison => 1,            
 
-            :command_points => {
-              :formula   => "1",
-            },
+            :command_points => "1",
     
           },
 
@@ -1722,9 +1720,7 @@ class GameRules::Rules
 
             :unlock_garrison => 2,            
 
-            :command_points => {
-              :formula   => "2+1*(MIN(LEVEL,15)-MIN(LEVEL,14))",
-            },
+            :command_points => "2+1*(MIN(LEVEL,15)-MIN(LEVEL,14))",
     
           },
 

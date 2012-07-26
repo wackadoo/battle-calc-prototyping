@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE Rules SYSTEM "../rules.dtd">
+
+    <Unit id="slingshot_warrior" category="unitcategory_artillery">
+      <Name>Slingshot Warrior</Name>
+      <Name lang="de_DE">Steinschleuderer</Name>
+  <Flavour lang="en_US">
+    <p>Kills opposing units.</p>
+  </Flavour>
+  <Flavour lang="de_DE">
+    <p>Je hübscher die Schleuder, desto tödlicher auch der Steinschleuderer. Ursache hierfür ist weniger die Schleuder als die natürliche Selektion unter den Steinschleuderern. Wer hat die schönste Schleuder? Die Überlebenden!</p>
+	</Flavour>
+      <Description lang="de_DE">
+    <p>Der Steinschleuderer trägt eine große Lederschleuder. Mit Hilfe dieser Schleuder schleudert der Steinschleuderer dem Gegner Steine entgegen.</p>
+    <p>Ausschlaggebend für die Zielsicherheit ist dabei zum einen die Technik. Zwei bis drei Schwünge und dann am Scheitelpunkt mit einem Ruck den Stein schleudern. Zum anderen - und dies behaupten vor allem die Anfänger- ist die Art der Schleuder wichtig. Hochwertigere Ledersorten mit einer einwandfreien Verarbeitung und schönen Verzierungen treffen besser.</p>
+	<p>Viele Tests konnten dies nicht belegen, dennoch sind die hochwertig verzierten Schleudern eine begehrte Beute. Sowohl beim Gegner als auch bei den eigenen Steinschleuderern.</p>
+	  </Description>
+      <Description lang="en_US">
+        <p>Small Stones, big Stones, a Peeble Thrower likes them all, as long as he can throw them at people. Ok, granted, the small ones are slightly prefered... Nevertheless, he may inflict moderate critical damage by sometimes hitting an opponent's eye.'</p>
+      </Description>
+      <Cost id="resource_stone" round="true">16</Cost>  
+	  <Cost id="resource_wood" round="true">4</Cost> 
+      <Cost id="resource_fur" round="true">12</Cost>    
+      <ProductionTime shortenable="true">500</ProductionTime>
+	  <Requirement id="building_firing_range" min_level="11" />	  
+      <Velocity>1</Velocity>
+      <ActionPoints>4</ActionPoints>
+      <Initiative>8</Initiative>
+      <Attack>18</Attack>
+      <CriticalDamage chance="0.01">10</CriticalDamage>
+      <Armor>2</Armor>
+      <Overrunnable>true</Overrunnable>
+      <Hitpoints>50</Hitpoints>
+      <Effectiveness category="unitcategory_infantry">1</Effectiveness>
+      <Effectiveness category="unitcategory_cavalry">1.1</Effectiveness>
+      <Effectiveness category="unitcategory_artillery">0.75</Effectiveness>
+      <Effectiveness category="unitcategory_siege">0.5</Effectiveness>   
+	  
+    </Unit>

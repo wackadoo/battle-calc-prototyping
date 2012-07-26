@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE Rules SYSTEM "../rules.dtd">
+
+    <Unit id="skewer" category="unitcategory_infantry">
+      <Name>Spit Bearer</Name>
+      <Name lang="de_DE">Bratspießträger</Name>
+      <Description lang="de_DE">
+        <p>Der Umgang mit der Waffe ist schnell gelernt: Das spitze Ende muss nach vorn!</p> 
+		<p>Richtig angewendet tropfen fettige Flüssigkeiten vom Spieß, genau genommen das Blut seiner Feinde</p>
+      </Description>
+      <Description lang="en_US">
+        <p>Skewer Crew training 101: stick'em with the pointy end!</p> 
+		<p>Greasy liquids are dripping from the spits, correctly used it is the enemies‘ blood.</p>
+      </Description>
+      <Cost id="resource_stone" round="true">2</Cost>  
+      <Cost id="resource_wood" round="true">10</Cost>    
+      <Cost id="resource_fur" round="true">4</Cost>    
+      <ProductionTime shortenable="true">300</ProductionTime>   
+	  <Requirement id="building_firing_range" min_level="21" />	  
+      <Velocity>1</Velocity>
+      <ActionPoints>4</ActionPoints>
+      <Initiative>15</Initiative>
+      <Attack>16</Attack>
+      <CriticalDamage chance="0.01" >11</CriticalDamage>
+      <Armor>3</Armor>
+      <Overrunnable>true</Overrunnable>
+      <Hitpoints>90</Hitpoints>
+      <Effectiveness category="unitcategory_infantry">0.9</Effectiveness><!-- due to the long weapon reduced effectivity against infantry but full effectivity against cavalry. a standard infantry (short weapon) would have effectivity 1 against infantry and reduced effictivity against cavalry, right?! -->
+      <Effectiveness category="unitcategory_cavalry">1.2</Effectiveness>
+      <Effectiveness category="unitcategory_artillery">0.6</Effectiveness>
+      <Effectiveness category="unitcategory_siege">0.6</Effectiveness>     
+    </Unit>

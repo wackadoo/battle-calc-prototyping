@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE Rules SYSTEM "../rules.dtd">
+
+ <Unit id="tree_huggers" category="unitcategory_infantry">
+      <Name>Tree Huggers</Name>
+      <Name lang="de_DE">Baum-Brutalo</Name>
+  <Flavour lang="en_US">
+    <p>Kills opposing units.</p>
+  </Flavour>
+  <Flavour lang="de_DE">
+    <p>Kämpft gegen andere Einheiten.</p>
+  </Flavour>
+      <Description lang="de_DE">
+        <p>Groß, stark, sauber rasierter Bart. Ein Baum-Brutalo legt sehr großen Wert auf sein Äußeres.</p> 
+		<p>In der Schlacht bietet der Baum-Brutalo ein seltsames Schauspiel. Umhüllt von den rauschen Blättern seines Kampfbaumes wirbelt der Baum-Brutalo durch die gegnerischen Reihen wie ein Säberlzahntiger, der sich den Schwanz geklammt hat. Nicht den flauschigen, den anderen...</p>
+      </Description>
+      <Description lang="en_US">
+        <p>What Tree-Huggers lack in brains, they make up for with sheer strength.</p>
+		<p>Telling by an unverified legend, those guys are brought up in a tree-nursery.</p>
+      </Description>
+      <Cost id="resource_stone" round="true">2</Cost>  
+      <Cost id="resource_wood" round="true">10</Cost>    
+      <Cost id="resource_fur" round="true">4</Cost>    
+      <ProductionTime shortenable="true">300</ProductionTime>  
+	  <Requirement id="building_barracks" min_level="11" /> 
+      <Velocity>0.95</Velocity>
+      <ActionPoints>4</ActionPoints>
+      <Initiative>14</Initiative>
+      <Attack>20</Attack>
+      <CriticalDamage chance="0.02">9</CriticalDamage>
+      <Armor>4</Armor>
+      <Overrunnable>true</Overrunnable>
+      <Hitpoints>140</Hitpoints>
+      <Effectiveness category="unitcategory_infantry">0.8</Effectiveness>
+      <Effectiveness category="unitcategory_cavalry">1</Effectiveness>
+      <Effectiveness category="unitcategory_artillery">0.8</Effectiveness>
+      <Effectiveness category="unitcategory_siege">1</Effectiveness> 
+    </Unit>

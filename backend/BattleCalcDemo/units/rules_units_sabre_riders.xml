@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE Rules SYSTEM "../rules.dtd">
+
+<Unit id="sabre_riders" category="unitcategory_cavalry">
+      <Name>Sabretooth-Riders</Name>
+      <Name lang="de_DE">Säbelzahnreiter</Name>
+      <Description lang="de_DE">
+        <p>Viele fürchten die Reittiere mehr als die eigentlichen Reiter...</p> 
+      </Description>
+      <Description lang="en_US">
+        <p>It's not so much the riders themselves that are feared...</p>
+      </Description>
+      <Cost id="resource_stone" round="true">2</Cost>  
+      <Cost id="resource_wood" round="true">10</Cost>    
+      <Cost id="resource_fur" round="true">4</Cost>    
+      <ProductionTime shortenable="true">300</ProductionTime>  
+	  <Requirement id="building_stud" min_level="11" />
+      <Velocity>1.4</Velocity>
+      <ActionPoints>4</ActionPoints>
+      <Initiative>28</Initiative>
+      <Attack>21</Attack>
+      <CriticalDamage chance="0.02">14</CriticalDamage>
+      <Armor>15</Armor>
+      <Overrunnable>true</Overrunnable>
+      <Hitpoints>140</Hitpoints>
+      <Effectiveness category="unitcategory_infantry">0.4</Effectiveness>
+      <Effectiveness category="unitcategory_cavalry">0.6</Effectiveness>
+      <Effectiveness category="unitcategory_artillery">1</Effectiveness>
+      <Effectiveness category="unitcategory_siege">0.4</Effectiveness>     
+    </Unit>

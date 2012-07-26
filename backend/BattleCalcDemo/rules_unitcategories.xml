@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE Rules SYSTEM "rules.dtd">
+
+  <UnitCategories>
+    <UnitCategory id="unitcategory_infantry">
+      <Name>Infantry</Name>
+      <Name lang="de_DE">Fußtruppen</Name>
+      <Description>
+        <p>English description here.</p>
+      </Description>
+      <Description lang="de_DE">
+        <p>Infanterie ist die Basiseinheit in jeder Truppe. Sie schützt Fernkämpfer vor direkt Angriffen und kann, wenn in ausreichender Zahl vorhanden, auch Flankenangriffe abwehren.</p>
+      </Description>
+      <Ability id="prevent-flanking" />
+			<TargetPriorities testType="no_test">
+				<TargetList>
+					<Target id="unitcategory_infantry" />
+					<Target id="unitcategory_cavalry" />
+					<Target id="unitcategory_artillery" />
+					<Target id="unitcategory_siege" />
+				</TargetList>
+			</TargetPriorities>
+    </UnitCategory>
+    <UnitCategory id="unitcategory_cavalry">
+      <Name>cavalry</Name>
+      <Name lang="de_DE">Reiter</Name>
+      <Description>
+        <p>English description here.</p>
+      </Description>
+      <Description lang="de_DE">
+        <p>Berittene Einheiten bewegen sich schnell auf dem Schlachtfeld, und sind als einzige in der Lage, die gegnerischen Fußtruppen zu umgehen und feindliche Fernkämpfer direkt anzugreifen (Flankenangriff).</p>
+      </Description>
+      <Ability id="flanking" />
+			<TargetPriorities testType="line_size_test" testCategory="infantry">
+				<TargetList>
+					<Target id="unitcategory_cavalry" />
+					<Target id="unitcategory_artillery" />
+					<Target id="unitcategory_infantry" />
+					<Target id="unitcategory_siege" />
+				</TargetList>
+				<TargetList>
+					<Target id="unitcategory_cavalry" />
+					<Target id="unitcategory_infantry" />
+					<Target id="unitcategory_artillery" />
+					<Target id="unitcategory_siege" />
+				</TargetList>
+			</TargetPriorities>
+    </UnitCategory>
+    <UnitCategory id="unitcategory_artillery">
+      <Name>Ranged Troops</Name>
+      <Name lang="de_DE">Fernkämpfer</Name>
+      <Description>
+        <p>English description here.</p>
+      </Description>
+      <Description lang="de_DE">
+        <p>Die Fernkämpfer schießen aus sicherer Distanz auf den Gegner, vorzugsweise auf Fußsoldaten. Im Nahkampf sind sie extrem anfällig.</p>
+      </Description>
+			<TargetPriorities testType="no_test">
+				<TargetList>
+					<Target id="unitcategory_infantry" />
+					<Target id="unitcategory_artillery" />
+					<Target id="unitcategory_cavalry" />
+					<Target id="unitcategory_siege" />
+				</TargetList>
+			</TargetPriorities>
+    </UnitCategory>
+    <UnitCategory id="unitcategory_siege">
+      <Name>Siege Weapons</Name>
+      <Name lang="de_DE">Belagerungsgeräte</Name>
+      <Description>
+        <p>Siege Weapons support armies in battle against settlements.</p>
+      </Description>
+      <Description lang="de_DE">
+        <p>Belagerungsgerät dient der Unterstützung im Kampf gegen Siedlungen.</p>
+      </Description>
+      <!--here we need a test: are there legal target buildings in the enemy faction? special abilities are on a per unit basis -->
+			<TargetPriorities testType="no_test">
+				<TargetList>
+					<Target id="unitcategory_siege" />
+					<Target id="unitcategory_artillery" />
+					<Target id="unitcategory_infantry" />
+					<Target id="unitcategory_cavalry" />
+				</TargetList>
+			</TargetPriorities>
+    </UnitCategory>
+  </UnitCategories>
+

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE Rules SYSTEM "../rules.dtd">
+
+<Unit id="neanderthal" category="unitcategory_infantry">
+  <Name>Neanderthal</Name>
+  <Name lang="de_DE">Neandertaler</Name>
+  <Description lang="de_DE">
+    <p>Wilder Vormenschenstamm.</p>		
+  </Description>
+  <Description lang="en_US">
+    <p>Fierce Fighters.</p>
+  </Description>
+  <Flavour lang="en_US">
+    <p>Don't talk, fight.</p>
+  </Flavour>
+  <Flavour lang="de_DE">
+    <p>Reden nicht, handeln. Äh, schlagen.</p>
+  </Flavour>
+	<Requirement id="building_stud" min_level="100" />
+  <Cost id="resource_stone" round="true">40</Cost>  
+  <Cost id="resource_wood" round="true">20</Cost>    
+  <Cost id="resource_fur" round="true">12</Cost>    
+  <ProductionTime shortenable="true">1200</ProductionTime>  
+  <Velocity>1</Velocity>
+  <ActionPoints>4</ActionPoints>
+  <Initiative>16</Initiative>
+  <Attack>15</Attack>
+  <CriticalDamage chance="0.01">2</CriticalDamage>
+  <Armor>0</Armor>
+  <Overrunnable>false</Overrunnable>
+  <Hitpoints>90</Hitpoints>
+  <Effectiveness category="unitcategory_infantry">1.0</Effectiveness>
+  <Effectiveness category="unitcategory_cavalry">0.8</Effectiveness>
+  <Effectiveness category="unitcategory_artillery">1.0</Effectiveness>
+  <Effectiveness category="unitcategory_siege">1.0</Effectiveness>    
+</Unit>
