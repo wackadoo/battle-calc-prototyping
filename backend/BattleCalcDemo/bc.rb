@@ -1,6 +1,38 @@
 require 'sinatra'
 require 'awe_native_extensions'
 require 'haml'
+
+#simulate the active record stuff
+module ActiveModel
+end
+
+module ActiveModel::Serializers
+end
+
+module ActiveModel::Serializers::JSON
+end
+
+module ActiveModel::Serializers::Xml
+end
+
+module ActiveModel::Conversion
+end
+
+module ActiveModel::Naming
+	def include_root_in_json=(value)
+	end
+end
+
+module GameRules
+end
+
+module Rails
+	def Rails.logger
+		nil
+	end
+end
+
+#now get the rules
 require './rules'
 
 def get_category_id(symb)
@@ -10,6 +42,7 @@ def get_category_id(symb)
 			return c[:id]
 		end
 	}	
+	puts symb
 	raise "category not found"
 end
 
@@ -19,14 +52,15 @@ def get_category_name(id)
 		if (c[:id] == id)
 			return c[:name][:en_US]
 		end
-	}	
+	}
+	puts id
 	raise "category not found"
 end
 
 def copy_battle(battle)
 	result = Battle::Battle.new
 	result.seed = battle.seed
-	puts "categories:"
+	#puts "categories:"
 	(0...battle.numUnitCategories).each {
 		|ci|
 		category = Battle::UnitCategory.new(battle.getUnitCategory(ci).categoryId)
@@ -46,7 +80,7 @@ def copy_battle(battle)
 			(0...oldArmy.numUnits).each {
 				|ui|
 				unit = oldArmy.getUnit(ui)
-				puts unit.baseDamage
+				#puts unit.baseDamage
 				unit_copy = Battle::Unit.new(unit)
 				army.addUnit(unit_copy)
 			}
@@ -56,6 +90,7 @@ def copy_battle(battle)
 end
 
 def reset_battle_vars(battle)
+	battle.seed = Random.new.rand(0...(2**30 - 1))
 	(0...battle.numFactions).each {
 		|fi|
 		faction = battle.getFaction(fi)
@@ -221,7 +256,7 @@ end
 
 def handle_request(params)
 	GC.disable
-	@rules = GameRules.the_rules
+	@rules = GameRules::Rules.the_rules
 	battle = parse_battle(params["units"])
 	puts "BATTLE VALID?"
 	puts battle.isValid
